@@ -14,7 +14,7 @@ public class Library {
 
     public Library()	{
         welcomeMessage="Welcome !";
-        menuList="1.Display Books" +"2.Reserve a Book" +"3Check Library number";
+        menuList="\n1.Display Books" +"   2.Reserve a Book" +"  3.Check Library number"+"   4.Exit";
     }
 
     public void displayWelcomeMessage(OutputStream output)throws IOException{
@@ -32,7 +32,6 @@ public class Library {
     private int getIntegerInputFromConsole() {
         int input = 0;
         try{
-            System.out.println("enter a number");
             input=new Scanner(System.in).nextInt();
         }
         catch(InputMismatchException e){
@@ -42,6 +41,13 @@ public class Library {
         return input;
     }
 
+    public int selectBookNumber(){
+        int input=getIntegerInputFromConsole();
+        if(input<booksList.size() && input>-1 ){
+            return input;
+        }
+        return -1;
+    }
     public void viewBooks(OutputStream output)throws IOException{
         for (Book1 aBooksList : booksList) {
             aBooksList.displayBook(output);

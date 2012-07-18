@@ -13,7 +13,7 @@ public class Book1Test {
         book.displayBook(output);
 
         String string= new String(output.toByteArray());
-        Assert.assertEquals("Book Number :0"+"Book name:hell"+"price :30.0"+"author :mor",string);
+        Assert.assertEquals("\n\nBook Number :0"+"\nBook name:hell"+"\nprice :30.0"+"\nauthor :mor",string);
     }
 
     @Test

@@ -20,10 +20,10 @@ public class Book1 {
     }
 
     public void displayBook(OutputStream output)throws IOException{
-        output.write(("Book Number :"+bookNumber).toString().getBytes());
-        output.write(("Book name:"+name).getBytes());
-        output.write(("price :"+price.toString()).getBytes());
-        output.write(("author :"+author).getBytes());
+        output.write(("\n\nBook Number :"+bookNumber).toString().getBytes());
+        output.write(("\nBook name:"+name).getBytes());
+        output.write(("\nprice :"+price.toString()).getBytes());
+        output.write(("\nauthor :"+author).getBytes());
     }
 
     public boolean getReserveStatus() {

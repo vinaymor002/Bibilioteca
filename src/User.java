@@ -18,7 +18,7 @@ public class User {
         bookCollectionList.add(book);
     }
 
-    public void displayUserNumber(OutputStream output)throws IOException{
-                 output.write(("User Number :"+(new Integer(userNumber).toString())+" Please talk to Librarian. Thank you").getBytes());
+    public int getUserNumber() {
+        return userNumber;
     }
 }

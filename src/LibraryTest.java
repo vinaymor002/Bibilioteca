@@ -27,11 +27,13 @@ public class LibraryTest {
         Library unit=new Library();
         unit.displayMenuList(output);
         String string=new String(output.toByteArray());
-        Assert.assertEquals("menu list","1.Display Books" +"2.Reserve a Book" +"3Check Library number",string);
+        Assert.assertEquals("menu list","\n1.Display Books" +"   2.Reserve a Book" +"  3.Check Library number"+"   4.Exit",string);
     }
 
     @Test
     public void shouldBeAbleToSelectMenuOption1(){
+
+
         Assert.assertEquals(1,new Library().selectMenuOption());
     }
 
@@ -54,6 +56,11 @@ public class LibraryTest {
     }
 
     @Test
+    public void shouldBeAbleToSelectBook(){
+
+    }
+
+    @Test
     public void shouldBeAbleToReserveBook(){
         Library unit = new Library();
         unit.booksList.add(new Book1("hell",30,"mor"));
@@ -65,9 +72,5 @@ public class LibraryTest {
         Assert.assertTrue("book reserved",unit.reserveBookToUser(0,0));
     }
 
-    @Test
-    public void shouldBeAbleToCheck(){
-
-    }
 
 }
