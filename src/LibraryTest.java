@@ -27,7 +27,7 @@ public class LibraryTest {
         Library unit=new Library();
         unit.displayMenuList(output);
         String string=new String(output.toByteArray());
-        Assert.assertEquals("menu list","\n1.Display Books" +"   2.Reserve a Book" +"  3.Check Library number"+"   4.Exit",string);
+        Assert.assertEquals("menu list","\n1.Display Books" +"   2.Reserve a Book" +"  3.Check Library number"+"    4.Display Movies"+"    5.Login/Logout"+"   6.Exit",string);
     }
 
     @Test
@@ -47,8 +47,8 @@ public class LibraryTest {
         Library unit= new Library();
 
         ByteArrayOutputStream output = new ByteArrayOutputStream();
-        unit.booksList.add(new Book1("hell",30,"mor"));
-        unit.booksList.add(new Book1("book2",34,"vinay"));
+        unit.booksList.add(new Book("hell",30,"mor"));
+        unit.booksList.add(new Book("book2",34,"vinay"));
 
         unit.viewBooks(output);
         String string = new String(output.toByteArray());
@@ -56,20 +56,38 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldBeAbleToSelectBook(){
+    public void shouldBeAbleToReserveBook(){
+        Library unit = new Library();
+        unit.booksList.add(new Book("hell",30,"mor"));
+        unit.booksList.add(new Book("book2",34,"vinay"));
 
+        unit.userList.add(new User());
+        unit.userList.add(new User());
+
+        Assert.assertTrue("book reserved",unit.reserveBookToUser(0,"111-1111"));
+    }
+    @Test
+    public void shouldBeAbleToDisplayMovies() throws IOException {
+        Library unit= new Library();
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+
+        unit.addMovieToLibrary(Movie.createMovie("movie1","director1"));
+        unit.addMovieToLibrary(Movie.createMovie("movie2","director2","N/A"));
+
+        unit.displayMovies(output);
+        String string=new String(output.toByteArray());
+        Assert.assertEquals("\nMovie name Director Rating"+" movie1   director1    5"+"\nMovie name Director Rating"+" movie2   director2    N/A",string);
     }
 
     @Test
-    public void shouldBeAbleToReserveBook(){
-        Library unit = new Library();
-        unit.booksList.add(new Book1("hell",30,"mor"));
-        unit.booksList.add(new Book1("book2",34,"vinay"));
-
+    public void shouldBeAbleToValidateLogin(){
+        Library unit =new Library();
+        User user1= new User();
+        unit.userList.add(user1);
         unit.userList.add(new User());
         unit.userList.add(new User());
 
-        Assert.assertTrue("book reserved",unit.reserveBookToUser(0,0));
+        Assert.assertEquals(user1,unit.validateUserLogin("111-1111", "password"));
     }
 
 

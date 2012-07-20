@@ -4,10 +4,10 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public class Book1Test {
+public class BookTest {
     @Test
     public void shouldDisplayBook() throws IOException {
-        Book1 book=new Book1("hell",30,"mor");
+        Book book=new Book("hell",30,"mor");
         ByteArrayOutputStream output = new ByteArrayOutputStream();
 
         book.displayBook(output);
@@ -18,7 +18,7 @@ public class Book1Test {
 
     @Test
     public void shouldgetBookReserveStatus(){
-        Book1 book=new Book1("hell",30,"mor");
+        Book book=new Book("hell",30,"mor");
         Assert.assertEquals("Book reserve status",false,book.getReserveStatus());
     }
 

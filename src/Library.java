@@ -9,12 +9,14 @@ import java.util.Scanner;
 public class Library {
     private final String welcomeMessage;
     private final String menuList;
-    protected List<Book1> booksList= new ArrayList<Book1>();
+    private User logedInUser=null;
+    protected List<Book> booksList= new ArrayList<Book>();
     protected List<User> userList=new ArrayList<User>();
+    protected List<Movie> movieList=new ArrayList<Movie>(15);
 
     public Library()	{
         welcomeMessage="Welcome !";
-        menuList="\n1.Display Books" +"   2.Reserve a Book" +"  3.Check Library number"+"   4.Exit";
+        menuList="\n1.Display Books" +"   2.Reserve a Book" +"  3.Check Library number"+"    4.Display Movies"+"    5.Login/Logout"+"   6.Exit";
     }
 
     public void displayWelcomeMessage(OutputStream output)throws IOException{
@@ -49,22 +51,61 @@ public class Library {
         return -1;
     }
     public void viewBooks(OutputStream output)throws IOException{
-        for (Book1 aBooksList : booksList) {
+        for (Book aBooksList : booksList) {
             aBooksList.displayBook(output);
             output.write(',');
         }
 
     }
 
-    public boolean reserveBookToUser(int bookNumber, int userNumber)throws IndexOutOfBoundsException{
+    public boolean reserveBookToUser(int bookNumber, String userNumber)throws IndexOutOfBoundsException{
         if(!booksList.get(bookNumber).getReserveStatus()){
             booksList.get(bookNumber).setReserveStatus(true);
-            userList.get(userNumber).addBookTOCollection(booksList.get(bookNumber));
+            userList.get(getIndexOfUser(userNumber)).addBookTOCollection(booksList.get(bookNumber));
             return true;
         }
         else
             return false;
     }
 
+    private int getIndexOfUser(String userNumber) {
+        int counter=-1;
+        for(User aUserList : userList){
+            counter++;
+            if(userNumber.equals(aUserList.getUserNumber())){
+                return counter;
+            }
+        }
+        return -1;
+    }
+
+    public void addMovieToLibrary(Movie movie){
+        movieList.add(movie);
+    }
+
+
+    public void displayMovies(OutputStream output) throws IOException {
+        for(Movie aMoviesList : movieList){
+            aMoviesList.displayMovie(output);
+        }
+    }
+
+    public User validateUserLogin(String userNumber, String userPassword) {
+        for(int i=0;i<userList.size()-1;i++){
+            if(userNumber.equals(userList.get(i).getUserNumber())){
+                if(userList.get(i).validateUserPassword(userPassword)){
+                    logedInUser=userList.get(i);
+                    return logedInUser;
+                }
+                break;
+            }
+        }
+        return null;
+    }
+
+    public User logoutUser(){
+        logedInUser=null;
+        return logedInUser;
+    }
 
 }

@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 
-public class Book1 {
+public class Book {
 
     private int bookNumber;
     private String name;
@@ -12,7 +12,7 @@ public class Book1 {
     private boolean reserveStatus=false;
     public static int bookNumberGenerator;
 
-    public Book1(String name, double price, String author){
+    public Book(String name, double price, String author){
         this.bookNumber=bookNumberGenerator++;
         this.name=name;
         this.price=price;
